@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <span class="live" id="live">长者生命：<span class="liveNum" id="liveNum">&&&lives&&&S</span></span><br>
+    <button type="submit" id="button">+1S</button>
+    <script>
+        button.addEventListener('click', (e) => {
+            let functionName = 'mdif' + parseInt(Math.random() * 10000, 10)
+            window[functionName] = function (result) {
+                if (result === 'success') {
+                    alert('成功续命1S')
+                    liveNum.innerText = parseInt(liveNum.innerText) + 1 + 'S'
+                } else {
+                    alert('续命失败')
+                }
+            }
+
+            let script = document.createElement('script')
+            script.src = 'http://frank.com:8888/increaseLive?callback=' + functionName
+            document.body.appendChild(script)
+            script.onload = (e) => {
+                e.currentTarget.remove()
+                delete window[functionName]
+            }
+        })
+
+    </script>
+</body>
+
+</html>
